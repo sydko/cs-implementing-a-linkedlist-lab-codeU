@@ -117,9 +117,8 @@ public class MyLinkedListTest {
 		assertThat(mll.contains(1), equalTo(true));
 		assertThat(mll.contains(4), equalTo(false));
 		assertThat(mll.contains(null), equalTo(false));
-		//Comment From Sydney : longer comment below in IndexOfNull
-		//mll.add(null);
-		//assertThat(mll.contains(null), equalTo(true));
+		mll.add(null);
+		assertThat(mll.contains(null), equalTo(true));
 	}
 
 	/**
@@ -155,11 +154,8 @@ public class MyLinkedListTest {
 	@Test
 	public void testIndexOfNull() {
 		assertThat(mll.indexOf(null), is(-1));
-		//mll.add(null);
-		/**
-		 * Comment From Sydney: When I tried to test what was happening with print statements it seemed like the add wasn't working properly; which was weird because it passed all the test -- but ultimately it was causing a null pointer exception
-		 */
-		//assertThat(mll.indexOf(null), is(3));		
+		mll.add(null);
+		assertThat(mll.indexOf(null), is(3));		
 	}
 
 	/**

@@ -85,29 +85,26 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
 	public void add(int index, E element) {
-	
-	System.out.println("original size:" + size + "index:" + index);
-	if (index < 0 || index > size) {
+	if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
 	Node newNode = new Node(element);
-	if (head == null || index == size) {
-	    add(element);
-	} else if (index == 0){
-	    newNode.next = head;
-	    head = newNode;
-            size ++;
-	} else {
-            Node prevLastNode = getNode(index-1);
+	if (index < size) {
+	    Node prevLastNode = getNode(index-1);
             newNode.next = prevLastNode.next;
             prevLastNode.next = newNode;
             size ++;
+	} else {
+	    add(element);
 	}
-	System.out.println("end size:"+ size);
-	Node node = head;
-	for(;node != null; node = node.next ){
-	    System.out.print(node.cargo + "--");
-	}
+	
+		//iterate through until index = i	
+	/*  if (index < size){
+	    Node newNode = getNode(size - 1); //gets the node we just cons'd
+	    Node prevNode = getNode(index - 1); //gets the node one before the one we want
+	    newNode.next = prevNode.next;
+	    prevNode.next = newNode;
+	    }*/
     }
     
     @Override
@@ -170,29 +167,13 @@ public class MyLinkedList<E> implements List<E> {
 	public int indexOf(Object target) {
 	int index = 0;
 	Node node = head;
-	
-	while(node != null){
+	while (node != null){
 	    if(node.cargo.equals(target))
 		return index;
 	    node = node.next;
 	    index++;
 	}
-	
-	//what if null is cargo of something?
-	node = head;
-	if (target == null){
-	    for(index = 0; index < size; index ++){
-		//		System.out.println("cargo:" + node.cargo +"\n"+index+"\nsize"+ size);
-		if(node.cargo == null){
-		    //  System.out.println("entered equals");
-		    return index;
-		}
-		node = node.next;
-	    }
-	}
-	
 	return -1;
-	
     }
 
     /** Checks whether an element of the array is the target.
